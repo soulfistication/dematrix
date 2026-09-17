@@ -23,9 +23,13 @@ const char kPathSeparator = '\\';
 const char kPathSeparator = '/';
 #endif
 
-string getCurrentDirectory() {
+const char* const kElementSeparator = " ";
+const char kNewLine = '\n';
+
+string getCurrentDirectory()
+{
 #if defined(_WIN32)
-    cont int kPathBuffSize = 4096;
+    const int kPathBuffSize = 4096;
     char buff[kPathBuffSize];
     if (_getcwd(buff, sizeof(buff))) {
         return string(buff);
