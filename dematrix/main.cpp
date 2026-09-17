@@ -43,7 +43,60 @@ string getCurrentDirectory()
     return ".";
 }
 
-int main(int argc, const char * argv[]) {
+const int kNumberOfLines = 102 * 256;
+const int kNumberOfColumns = 16;
+
+vector<string> splitByTwoSpaces(const string& line)
+{
+    vector<string> columns;
+    
+    const string delim = kElementSeparator;
+    size_t start = 0;
+    
+    for (; ; ) {
+        const size_t pos = line.find(delim, start);
+        if (pos == string::npos) {
+            columns.push_back(line.substr(start));
+            break;
+        }
+        columns.push_back(line.substr(start, pos - start));
+        start = pos + delim.size();
+    }
+    
+    return columns;
+}
+
+int convert(const string& pointString)
+{
+    const int error = 0;
+    
+    if (pointString.empty())
+    {
+        cout << "Point string was null" << endl;
+        return error;
+    }
+    
+    const char* cstr = pointString.c_str();
+    char *endptr = 0;
+    const double point = strtod(cstr, &endptr);
+    
+    while (endptr && *endptr && isspace(static_cast<unsigned char>(*endptr)))
+    {
+        ++endptr;
+    }
+    
+    if (endptr == cstr || *endptr != '\0')
+    {
+        cout << "Error reading point: " << pointString << endl;
+        return error;
+    }
+    
+    const double converted = point * 10.0;
+    return static_cast<int>(converted);
+}
+
+int main(int argc, const char * argv[])
+{
     cout << "Hello, World!\n";
     return EXIT_SUCCESS;
 }
