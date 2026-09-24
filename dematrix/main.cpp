@@ -31,12 +31,14 @@ string getCurrentDirectory()
 #if defined(_WIN32)
     const int kPathBuffSize = 4096;
     char buff[kPathBuffSize];
-    if (_getcwd(buff, sizeof(buff))) {
+    if (_getcwd(buff, sizeof(buff)))
+    {
         return string(buff);
     }
 #else
     char buff[PATH_MAX];
-    if (getcwd(buff, sizeof(buff))) {
+    if (getcwd(buff, sizeof(buff)))
+    {
         return string(buff);
     }
 #endif
@@ -53,9 +55,11 @@ vector<string> splitByTwoSpaces(const string& line)
     const string delim = kElementSeparator;
     size_t start = 0;
     
-    for (; ; ) {
+    for (;;)
+    {
         const size_t pos = line.find(delim, start);
-        if (pos == string::npos) {
+        if (pos == string::npos)
+        {
             columns.push_back(line.substr(start));
             break;
         }
