@@ -101,6 +101,35 @@ int convert(const string& pointString)
 
 int main(int argc, const char * argv[])
 {
-    cout << "Hello, World!\n";
+    cout << "dematrix ver. " << kProgramVersion << endl;
+    
+    const string prefix = "ESOCEP";
+    const string extension = ".DAT";
+    string base = getCurrentDirectory() + kPathSeparator;
+    
+    ifstream reader((base + "EG.TXT").c_str());
+    
+    if (!reader) {
+        cout << "File not found on Dematrix. Exiting..." << endl;
+        return 1;
+    }
+    
+    ofstream writer1((base + prefix + "F1" + extension).c_str());
+    ofstream writer2((base + prefix + "F3" + extension).c_str());
+    ofstream writer3((base + prefix + "C3" + extension).c_str());
+    ofstream writer4((base + prefix + "P3" + extension).c_str());
+    ofstream writer5((base + prefix + "O1" + extension).c_str());
+    ofstream writer6((base + prefix + "F7" + extension).c_str());
+    ofstream writer7((base + prefix + "T3" + extension).c_str());
+    ofstream writer8((base + prefix + "T5" + extension).c_str());
+    ofstream writer9((base + prefix + "F2" + extension).c_str());
+    ofstream writer10((base + prefix + "F4" + extension).c_str());
+    ofstream writer11((base + prefix + "C4" + extension).c_str());
+    ofstream writer12((base + prefix + "P4" + extension).c_str());
+    ofstream writer13((base + prefix + "02" + extension).c_str());
+    ofstream writer14((base + prefix + "F8" + extension).c_str());
+    ofstream writer15((base + prefix + "T4" + extension).c_str());
+    ofstream writer16((base + prefix + "T6" + extension).c_str());
+                     
     return EXIT_SUCCESS;
 }
