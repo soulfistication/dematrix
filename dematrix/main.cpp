@@ -107,7 +107,7 @@ int main(int argc, const char * argv[])
     const string extension = ".DAT";
     string base = getCurrentDirectory() + kPathSeparator;
     
-    ifstream reader((base + "EG.TXT").c_str());
+    ifstream reader((base + "EP.DAT").c_str());
     
     if (!reader) {
         cout << "File not found on Dematrix. Exiting..." << endl;
