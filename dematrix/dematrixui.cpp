@@ -1,3 +1,5 @@
+#if defined(_WIN32)
+
 #include <windows.h>
 
 // Forward declaration of the window procedure
@@ -68,3 +70,5 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     // Default handling for all other messages
     return DefWindowProc(hwnd, msg, wParam, lParam);
 }
+#endif
+
