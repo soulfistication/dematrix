@@ -159,7 +159,7 @@ int main(int argc, const char * argv[])
 
         for (int i = 0; i < kNumberOfLines; i++)
         {
-            if (!getLine(reader, line))
+            if (!getline(reader, line))
             {
                 cout << "Cannot read line on dematrix" << endl;
                 break;
@@ -184,7 +184,7 @@ int main(int argc, const char * argv[])
                 const string& value = columns[c];
                 const int v = convert(value);
                 cout << v << endl;
-                *writer[c] << v << kNewLine;
+                *writers[c] << v << kNewLine;
                 if (!*writers[c]) {
                     throw runtime_error("write");
                 }
