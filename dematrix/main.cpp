@@ -130,6 +130,73 @@ int main(int argc, const char * argv[])
     ofstream writer14((base + prefix + "F8" + extension).c_str());
     ofstream writer15((base + prefix + "T4" + extension).c_str());
     ofstream writer16((base + prefix + "T6" + extension).c_str());
+
+    ofstream *writers[] = {
+        &writer1, &writer2, &writer3, &writer4,
+        &writer5, &writer6, &writer7, &writer8,
+        &writer9, &writer10, &writer11, &writer12,
+        &writer13, &writer14, &writer15, &writer16
+    };
+
+    bool io_ok = true;
+
+    for (int i = 0; i < 16; i++)
+    {
+        if (!*writers[i]) {
+            io_ok = false;
+            break;
+        }
+    }
+
+    if (!io_ok)
+    {
+        cout << "I/O exception dematrix. Process finished!" << endl;
+        return 1;
+    }
+
+    try {
+        string line;
+
+        for (int i = 0; i < kNumberOfLines; i++)
+        {
+            if (!getLine(reader, line))
+            {
+                cout << "Cannot read line on dematrix" << endl;
+                break;
+            }
+            
+            cout << line << endl;
+
+            const vector<string> columns = splitByTwoSpaces(line);
+            const int ncols = static_cast<int>(columns.size());
+
+            if (ncols != kNumberOfColumns)
+            {
+                cout << "Matrix does not have 16 columns." << endl;
+                if (ncols < kNumberOfColumns)
+                {
+                    continue;
+                }
+            }
+
+            for (int c = 0; c < kNumberOfColumns; c++)
+            {
+                const string& value = columns[c];
+                const int v = convert(value);
+                cout << v << endl;
+                *writer[c] << v << kNewLine;
+                if (!*writers[c]) {
+                    throw runtime_error("write");
+                }
+            }
+
+        }
+        
+    } catch (const runtime_error&) {
+        cout << "Runtime error on dematrix" << endl;
+    }
+    
+    cout << "Process finished!" << endl;
                      
     return EXIT_SUCCESS;
 }
